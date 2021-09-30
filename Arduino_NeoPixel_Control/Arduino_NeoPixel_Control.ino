@@ -1,7 +1,7 @@
 #include <FastLED.h>//Used for Neopixel
 
 #define NUM_LEDS 25//Number of LEDS on the strip
-#define DATA_PIN 2//Data pin for the strip
+#define DATA_PIN 2//Data pin for the strip, remember to attach a 100 ohm resistor between the pin and the input of the first led
 
 #define CMD_LENGTH 32//This is the max length of the command, change it if a bigger command string is needed
 #define CMD_START '['//Start point of the command, can be customized, but still use brackets
