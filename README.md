@@ -11,7 +11,7 @@ You can also add your own colors or animations by simpling adding some code to t
 Both codes are completly commented so if you have any doubt or are just curios on how everything works, just check the code.
 
 The communication protocol is based on sending commands over serial. A command is defined by 2 "markers", one starting character and an ending one. A simple command is [red]:
-the arduino function reads the first character, and if it's the stating marker "CMD_START" then starts to read the real command until it reads the ending marker "CMD_END", in this case the "red" command, that sets the leds to a full red. All the commands are equal in struct, but the name, exept the [setRgb] command: this one actually has 3 valus coming in with him and those are the Red, Green and Blue codes used for the custom color.
+the arduino function reads the first character, and if it's the starting marker "CMD_START" then starts to read the real command until it reads the ending marker "CMD_END", in this case the "red" command, that sets the leds to a full red. All the commands are equal in struct, but the name, exept the [setRgb] command: this one actually has 3 valus coming in with him and those are the Red, Green and Blue codes used for the custom color.
 
 To power the leds, I recommend using at least a 5V/2A power supply, a phone charger will do the job. 
 
