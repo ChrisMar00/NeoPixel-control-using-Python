@@ -1,3 +1,7 @@
+/*
+  Made by Christian Marotta
+*/
+
 #include <FastLED.h>//Used for Neopixel
 
 #define NUM_LEDS 25//Number of LEDS on the strip
