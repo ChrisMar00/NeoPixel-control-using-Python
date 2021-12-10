@@ -1,3 +1,8 @@
+################################
+# RGB Control 1.1              #
+# Created by Christian Marotta #
+################################
+
 import serial
 from tkinter import *
 
@@ -8,7 +13,7 @@ baudRate = "9600"
 # Set ser as serial port COM3 at 9600 baud rate
 ser = serial.Serial(port, baudRate)
 
-# Creating a GUI with tkinter
+# Creating GUI with tkinter
 window = Tk()
 window.title("RGB Monitor")
 window.geometry("575x430")
@@ -18,6 +23,7 @@ window.configure(bg="black")
 
 
 # Button functions
+# Encode is used to send bytes to the listener
 def red():
     ser.write("[red]".encode())
 
@@ -67,7 +73,7 @@ def meteorRain():
 def off():
     ser.write("[turnOff]".encode())
 
-
+# Creates the setRgb string
 def setRgb():
     r = entry_RED.get()
     g = entry_GREEN.get()
@@ -92,7 +98,6 @@ btn_MeteorRain = Button(window, text="METEOR\nRAIN", width=15, height=4, command
 btn_NeonPurple = Button(window, text="NEON\nPURPLE", width=15, height=4, command=neonPurple, fg="white", bg="black")
 btn_SetRGB = Button(window, text="Set RGB", width=15, height=4, command=setRgb, fg="white", bg="black")
 
-
 lb_RED = Label(window, bg="black", fg="red", text="RED: ", width=15, height=4)
 lb_GREEN = Label(window, bg="black", fg="green", text="GREEN: ", width=15, height=4)
 lb_BLUE = Label(window, bg="black", fg="blue", text="BLUE: ", width=15, height=4)
@@ -102,38 +107,38 @@ entry_GREEN = Entry(window, width=15, fg="green")
 entry_BLUE = Entry(window, width=15, fg="blue")
 
 # Insert widgets in the window
-btn_OFF.grid(row=0, column=0)
-btn_RED.grid(row=1, column=0)
+btn_OFF.grid(row = 0, column = 0)
+btn_RED.grid(row = 1, column = 0)
 
-btn_GREEN.grid(row=0, column=1)
-btn_BLUE.grid(row=1, column=1)
+btn_GREEN.grid(row = 0, column = 1)
+btn_BLUE.grid(row = 1, column = 1)
 
-btn_WHITE.grid(row=0, column=2)
-btn_RGBLoop.grid(row=1, column=2)
+btn_WHITE.grid(row = 0, column = 2)
+btn_RGBLoop.grid(row = 1, column = 2)
 
 btn_Strobe.grid(row=0, column=3)
 btn_Sparkle.grid(row=1, column=3)
 
-btn_RainbowCycle.grid(row=0, column=4)
-btn_TwinkleRandom.grid(row=1, column=4)
+btn_RainbowCycle.grid(row = 0, column = 4)
+btn_TwinkleRandom.grid(row = 1, column = 4)
 
-btn_TheaterChaseRainbow.grid(row=2, column=0)
-btn_MeteorRain.grid(row=2, column=1)
+btn_TheaterChaseRainbow.grid(row = 2, column = 0)
+btn_MeteorRain.grid(row = 2, column = 1)
 
-btn_NeonPurple.grid(row=2, column=2)
+btn_NeonPurple.grid(row = 2, column = 2)
 
-lb_RED.grid(row=3, column=0)
-entry_RED.grid(row=3, column=1)
-btn_SetRGB.grid(row=3, column=2)
+lb_RED.grid(row = 3, column = 0)
+entry_RED.grid(row = 3, column = 1)
+btn_SetRGB.grid(row = 3, column = 2)
 
-lb_GREEN.grid(row=4, column=0)
-entry_GREEN.grid(row=4, column=1)
+lb_GREEN.grid(row = 4, column = 0)
+entry_GREEN.grid(row = 4, column = 1)
 
-lb_BLUE.grid(row=5, column=0)
-entry_BLUE.grid(row=5, column=1)
+lb_BLUE.grid(row = 5, column = 0)
+entry_BLUE.grid(row = 5, column = 1)
 
 # Gets a feedback from arduino serial and turns off the leds
 if ser.readline() == b'Ready to receive!\r\n':
     off()
 
-window.mainloop()
+window.mainloop() # Tkinter main loop
