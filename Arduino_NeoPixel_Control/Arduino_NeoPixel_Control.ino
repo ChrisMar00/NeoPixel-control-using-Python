@@ -1,5 +1,6 @@
 /*
-  Made by Christian Marotta
+  Arduino Neopixel Control 1.0
+  Created by Christian Marotta
 */
 
 #include <FastLED.h>//Used for Neopixel
@@ -17,6 +18,7 @@ char *cmdTemp;
 bool newData = false;//Used to indicate if there's new data or not
 bool isReceiving = false;//Turned true if the first char isn the CMD_START character
 byte R = 0, G = 0, B = 0;
+byte pixel = 0;
 
 CRGB leds[NUM_LEDS];
 
@@ -102,6 +104,8 @@ void vfx(char *s) {
   } else if (String(s).equals("setRgb")) {
     setRgb();
     cmdTemp = "";//Really important, it would show the color for a fraction of a second
+  } else if ( String(s).equals("setPixel")) {
+    setPixel();
   } else if (String(s).equals("turnOff")) {
     turnOff();
   }
@@ -110,13 +114,26 @@ void vfx(char *s) {
 //Trims the command, obtaining 3 RGB values
 void getRgbValues() {
   char *values;
-  values = strtok(cmdCopy, ",");
-  values = strtok(NULL, ",");
-  R = atoi(values);
-  values = strtok(NULL, ",");
-  G = atoi(values);
-  values = strtok(NULL, ",");
-  B = atoi(values);
+  if (String(cmdTemp).equals("setPixel")) {//If cmdTemp equals to "setPixel" then it gets another valus, which is the led position
+    values = strtok(cmdCopy, ",");
+    values = strtok(NULL, ",");
+    pixel = atoi(values);
+    values = strtok(NULL, ",");
+    R = atoi(values);
+    values = strtok(NULL, ",");
+    G = atoi(values);
+    values = strtok(NULL, ",");
+    B = atoi(values);
+  } else {
+    values = strtok(cmdCopy, ",");
+    values = strtok(NULL, ",");
+    R = atoi(values);
+    values = strtok(NULL, ",");
+    G = atoi(values);
+    values = strtok(NULL, ",");
+    B = atoi(values);
+  }
+
 }
 
 //Animations
@@ -124,6 +141,14 @@ void getRgbValues() {
 void setRgb() {
   getRgbValues();
   fill_solid(leds, NUM_LEDS, CRGB(R, G, B));
+  showStrip();
+  delay(100);
+}
+
+//Sets a specific led to a RGB color
+void setPixel() {
+  getRgbValues();
+  leds[pixel].setRGB(R, G, B);
   showStrip();
   delay(100);
 }
